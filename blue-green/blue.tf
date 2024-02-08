@@ -4,7 +4,7 @@ resource "aws_instance" "blue" {
         instance_type = "t2.micro"
         subnet_id = aws_subnet.blue_subnet.id
         vpc_security_group_ids = [aws_security_group.allow-internal-network.id]
-        user_data = templatefile("/home/ihayes/git/blue-green/bootstrap.sh", {file_content = "version 1.0 - # ${count.index}"})
+        user_data = templatefile("%{path.module}/bootstrap.sh", {file_content = "version 1.0 - # ${count.index}"})
         iam_instance_profile = data.aws_iam_instance_profile.SSM.name
         depends_on = [aws_nat_gateway.nat_gateway]
 }
