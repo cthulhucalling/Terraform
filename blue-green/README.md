@@ -11,11 +11,9 @@ The EC2s depend on the NAT gatway being up and running, and the subnets routing 
 There's tons of documentation out there on having TF deploy a role for this but not a whole lot on how to deploy workloads with existing roles. Assuming you want to run the EC2s under a role that has the basic SSM permissions (SSMRoleforManagedHosts) so you can connect to them, here is how it's done:
 
 In variables.tf
-data "aws_iam_instance_profile" "my-ssm-role" {
-
+```data "aws_iam_instance_profile" "my-ssm-role" {
   name = "SSMRoleforManagedHosts"
-  
-}
+}```
 
 You want a data object so TF queries AWS for the role information
 When you create an EC2 instance
