@@ -18,16 +18,12 @@ data "aws_iam_instance_profile" "my-ssm-role" {
 ```
 You want a data object so TF queries AWS for the role information
 When you create an EC2 instance
-
+```
 resource "aws_instance" "my-ec2" {
-
         ami = data.aws_ami.amazon_linux.id
-        
         instance_type = "t2.micro"
-        
         subnet_id = aws_subnet.blue_subnet.id
-        
         **iam_instance_profile = data.aws_iam_instance_profile.my-ssm-role.name**
 }
-
+```
 That's it. Seriously. I don't know why it's so difficult to find actual useful information on how to do this.
