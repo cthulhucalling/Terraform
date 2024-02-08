@@ -8,7 +8,7 @@ The EC2s depend on the NAT gatway being up and running, and the subnets routing 
 
 **HOW TO LAUNCH AN EC2 IN TERRAFORM USING AN EXISTING IAM ROLE**
 
-There's tons of documentation out there on having TF deploy a role for this but not a whole lot on how to deploy workloads with existing roles. Assuming you want to run the EC2s under a role that has the basic SSM permissions (SSMRoleforManagedHosts) so you can connect to them, here is how it's done:
+There's tons of documentation out there on having TF deploy a role for this but not a whole lot on how to deploy workloads with existing roles. Assuming you want to run the EC2s under a role that has the basic SSM permissions so you can connect to them, here is how it's done. First get the role name. If you're using AWS default role names, the role SSMRoleforManagedHosts provides the minimun SSM permissions needed to get SSM and Connect working. Otherwise, use the name (not ARN) of whatever role you want the EC2s to run as.
 
 In variables.tf
 ```
