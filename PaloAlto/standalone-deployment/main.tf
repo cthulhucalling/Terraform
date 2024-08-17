@@ -59,7 +59,7 @@ resource "aws_security_group" "allow_access_from_home" {
         }
 }
 
-### Let's try to make a Palo Alto!
+### Let's make a Palo Alto!
 module "vmseries-modules_vmseries" {
         source  = "PaloAltoNetworks/vmseries-modules/aws//modules/vmseries"
         version = "1.1.6"
@@ -95,4 +95,34 @@ module "vmseries-modules_vmseries" {
                         security_group_ids = []
                 }
         }
+}
+
+### Let's make a Panorama!
+module "swfw-modules_panorama" {
+        source  = "PaloAltoNetworks/swfw-modules/aws//modules/panorama"
+        version = "2.0.13"
+
+        ssh_key_name = "mysshkeypair"
+        availability_zone = "us-east-1a"
+        subnet_id = aws_subnet.management_subnet.id
+        create_public_ip = true
+        vpc_security_group_ids = [aws_security_group.allow_access_from_home.id]
+        panorama_iam_role = "panorama"
+        panorama_ami_id = "ami-123345"
+
+        ebs_volumes = [
+                {
+                        name = "ebs-1"
+                        ebs_device_name = "/dev/sda"
+                        ebs_size = "1000"
+                },{
+                        name = "ebs-2"
+                        ebs_device_name = "/dev/sdb"
+                        ebs_size = "2000"
+                },{
+                        name = "ebs-3"
+                        ebs_device_name = "/dev/sdc"
+                        ebs_size = "10000"
+                }
+        ]
 }
