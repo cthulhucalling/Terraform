@@ -70,5 +70,5 @@ resource "aws_instance" "my_proxy" {
 	vpc_security_group_ids = [aws_security_group.allow_home.id]
 	depends_on = [aws_internet_gateway.ig]
 	user_data = templatefile("${path.module}/bootstrap.sh",{home_ip=var.home_ip})
-	key_name = "isrlabs"
+	key_name = "<sshkey>"
 }
