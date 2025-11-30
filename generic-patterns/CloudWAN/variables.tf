@@ -1,6 +1,6 @@
 variable "profile" {
 	type = string
-	default = "isrlabs-general"
+	default = "<your AWS SSO profile>"
 }
 
 variable "east_vpc_cidr" {
